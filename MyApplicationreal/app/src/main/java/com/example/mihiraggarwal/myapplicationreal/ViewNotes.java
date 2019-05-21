@@ -16,10 +16,13 @@ public class ViewNotes extends AppCompatActivity {
         setContentView(R.layout.activity_view_notes);
         mAuth=FirebaseAuth.getInstance();
     }
-
     public void logout(View view) {
         mAuth.signOut();
         Toast.makeText(this, "Logout successful", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(ViewNotes.this,MainActivity.class));
+        finish();
+    }
+    public void addNote(View view) {
+        startActivity(new Intent(ViewNotes.this,AddTask.class));
     }
 }
