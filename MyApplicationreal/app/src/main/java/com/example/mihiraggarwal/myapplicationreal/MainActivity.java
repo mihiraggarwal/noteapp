@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this,AddTask.class));
                         } else {
                             // Failed sign in. Display a message to the user regarding the same
-                            Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
-                            System.out.println(task.getException());
+                            String substr=task.getException().toString();
+                            Toast.makeText(getApplicationContext(), substr.substring(substr.lastIndexOf("T")), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this,ViewNotes.class));
                         } else  {
                             // Failed sign in. Display a message to the user regarding the same
-                            Toast.makeText(MainActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            String substr=task.getException().toString();
+                            Toast.makeText(getApplicationContext(), substr.substring(substr.lastIndexOf("T")), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
