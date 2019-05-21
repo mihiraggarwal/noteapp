@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
-            android:id="@+id/username_edit"
+            android:id="@+id/emailAddress_edit"
             android:textSize="25dp"
             />
         <EditText
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:id="@+id/passwrod_edit"
+            android:id="@+id/password_edit"
             android:textSize="25dp"
             />
     </LinearLayout>
@@ -70,8 +70,20 @@
         android:textSize="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="login"
+        android:layout_above="@id/signUp_button"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signUp_button"
+        android:text="SIGN UP"
+        android:textSize="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:onClick="reachAddTask"
+        android:onClick="signUp"
         />
 </RelativeLayout>
