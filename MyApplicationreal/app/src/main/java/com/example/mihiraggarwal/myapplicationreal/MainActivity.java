@@ -22,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        if (user!=null){
+            startActivity(new Intent(MainActivity.this,ViewNotes.class));
+        }
     }
     public void signUp(View view){
         EditText emailet=findViewById(R.id.emailAddress_edit);
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                             // Successful sign in. Update the UI with the user's information
                             FirebaseUser user=mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this,AddTask.class));
+                            startActivity(new Intent(MainActivity.this,ViewNotes.class));
                         } else  {
                             // Failed sign in. Display a message to the user regarding the same
                             Toast.makeText(MainActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
