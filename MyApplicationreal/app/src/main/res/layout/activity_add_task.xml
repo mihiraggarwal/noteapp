@@ -49,7 +49,7 @@
         android:layout_marginBottom="10dp"
         android:text="SAVE"
         android:textSize="30dp"
-        android:onClick="reachViewTask"
+        android:onClick="saveNote"
         />
     <TextView
         android:layout_width="match_parent"
