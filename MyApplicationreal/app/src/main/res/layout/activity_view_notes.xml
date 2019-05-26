@@ -15,7 +15,7 @@
         android:textSize="50dp"
         android:fontFamily="casual"
         android:textColor="#0F0F0F"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="65dp"
         />
     <Button
         android:layout_width="match_parent"
@@ -41,4 +41,13 @@
         android:layout_marginBottom="10dp"
         android:onClick="addNote"
         />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/myNotes_text"
+        android:layout_above="@id/addNote_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/recyclerView">
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

@@ -29,12 +29,15 @@ private FirebaseAuth mAuth;
     public void saveNote(View view){
         EditText titleet=findViewById(R.id.title_edit);
         EditText contentet=findViewById(R.id.content_edit);
+        EditText timestampet=findViewById(R.id.date_edit);
         String title=titleet.getText().toString();
         String content=contentet.getText().toString();
+        String timestamp=timestampet.getText().toString();
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         Map<String, Object> noteDetails=new HashMap<>();
         noteDetails.put("title", title);
         noteDetails.put("content", content);
+        noteDetails.put("timestamp", timestamp);
         FirebaseUser user=mAuth.getCurrentUser();
         noteDetails.put("UID", user.getUid());
         db.collection("Notes").add(noteDetails)

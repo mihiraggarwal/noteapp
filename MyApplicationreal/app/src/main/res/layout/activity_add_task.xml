@@ -21,14 +21,35 @@
             android:textColor="#0F0F0F"
             android:id="@+id/addTask_text"
             />
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:textSize="25dp"
-            android:id="@+id/title_edit"
-            android:layout_marginTop="60dp"
-            />
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                android:textSize="25dp"
+                android:id="@+id/title_edit"
+                android:layout_marginTop="60dp"
+                android:layout_weight="50"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:hint="Date"
+                android:layout_marginTop="60dp"
+                android:textSize="25dp"
+                android:id="@+id/date_edit"
+                />
+        </LinearLayout>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
