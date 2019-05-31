@@ -1,8 +1,10 @@
 package com.example.mihiraggarwal.myapplicationreal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +16,16 @@ import android.widget.Toast;
 import com.example.mihiraggarwal.myapplicationreal.Models.NoteDetails;
 import com.example.mihiraggarwal.myapplicationreal.adapter.NotesRecyclerAdapter;
 import com.example.mihiraggarwal.myapplicationreal.util.VerticalSpacingItemDecorator;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.api.LogDescriptor;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener{
     // UI components
@@ -27,6 +35,8 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
     private NotesRecyclerAdapter mNotesRecyclerAdapter;
 
     private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,5 +86,19 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
     @Override
     public void onNoteClick(int position){
         startActivity(new Intent(ViewNotes.this,TheNote.class));
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Are you sure you want to exit?");
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                System.exit(0);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", null);
+        alertDialogBuilder.show();
     }
 }

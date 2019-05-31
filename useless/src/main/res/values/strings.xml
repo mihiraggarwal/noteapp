@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="my_text">kdbnskfjdnsfkj</string>
-    <string name="title_activity_add_task">AddTask</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="title_activity_add_task2">AddTask2</string>
-</resources>
