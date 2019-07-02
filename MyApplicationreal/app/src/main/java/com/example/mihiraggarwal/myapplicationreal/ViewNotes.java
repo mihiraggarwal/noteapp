@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +17,15 @@ import android.widget.Toast;
 import com.example.mihiraggarwal.myapplicationreal.Models.NoteDetails;
 import com.example.mihiraggarwal.myapplicationreal.adapter.NotesRecyclerAdapter;
 import com.example.mihiraggarwal.myapplicationreal.util.VerticalSpacingItemDecorator;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.api.LogDescriptor;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
 
     private FirebaseAuth mAuth;
 
+    private static final String TAG = "ViewNotes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,6 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
                 onNoteClick(1);
             }
         });
-
         initRecyclerView();
         insertNotes();
     }
@@ -63,15 +67,31 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
     public void addNote(View view) {
         startActivity(new Intent(ViewNotes.this,AddTask.class));
     }
+
     private void insertNotes(){
-        for (int i=0; i<=100; i++){
-            NoteDetails note=new NoteDetails();
-            note.setTitle("Title #" + i);
-            note.setContent("content" + i);
-            note.setTimestamp("26.05.19");
-            mNotes.add(note);
-        }
-        mNotesRecyclerAdapter.notifyDataSetChanged();
+        FirebaseUser user=mAuth.getCurrentUser();
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("Notes")
+                .whereEqualTo("UID", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot:task.getResult()){
+                        NoteDetails note = new NoteDetails();
+                        note.setTitle(documentSnapshot.getString("title"));
+                        note.setContent(documentSnapshot.getString("content"));
+                        note.setTimestamp(documentSnapshot.getString("timestamp"));
+                        mNotes.add(note);
+                        Log.d(TAG, documentSnapshot.getId() + "=>" + documentSnapshot.getData());
+                    }
+                    mNotesRecyclerAdapter.notifyDataSetChanged();
+                } else {
+                    Log.d(TAG, "Error getting documents" , task.getException());
+                }
+            }
+        });
     }
 
     private void initRecyclerView(){
