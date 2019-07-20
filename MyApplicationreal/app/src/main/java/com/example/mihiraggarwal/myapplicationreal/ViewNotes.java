@@ -49,12 +49,6 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
         mAuth=FirebaseAuth.getInstance();
         mRecyclerView=findViewById(R.id.recyclerView);
 
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onNoteClick(1);
-            }
-        });
         initRecyclerView();
         insertNotes();
     }
@@ -105,7 +99,10 @@ public class ViewNotes extends AppCompatActivity implements NotesRecyclerAdapter
 
     @Override
     public void onNoteClick(int position){
-        startActivity(new Intent(ViewNotes.this,TheNote.class));
+        Intent intent = new Intent(this, TheNote.class);
+        intent.putExtra("selected_note", mNotes.get(position));
+        startActivity(intent);
+        Log.d(TAG, "onNoteClick: " + position);
     }
     @Override
     public void onBackPressed() {

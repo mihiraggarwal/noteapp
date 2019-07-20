@@ -40,14 +40,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 />
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
                 android:hint="Date"
                 android:layout_marginTop="60dp"
                 android:textSize="25dp"
-                android:id="@+id/date_edit"
+                android:id="@+id/date_text"
+                android:clickable="true"
+                android:focusable="false"
                 />
         </LinearLayout>
         <EditText
